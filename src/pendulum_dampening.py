@@ -5,14 +5,14 @@ from tqdm import tqdm
 from scipy.integrate import odeint
 import numpy as np 
 
-def derive(y,t,m1,m2,l_1,l_2,g):
+def derive(y,t,m1,m2,l_1,l_2,g,dampening_l1=1,dampening_l2=1):
     #formula's from https://www.myphysicslab.com/pendulum/double-pendulum-en.html
-    #with naive dampening
+    #with naive dampening (dampening weight is 1 for l_1 and l_2)
     theta1, dot_theta1, theta2, dot_theta2 = y
 
     dotdot_theta1 =(-g*(2*m1+m2)*np.sin(theta1)-m2*g*np.sin(theta1-2*theta2)-2*np.sin(theta1-theta2)*m2*((dot_theta2**2)*l_2+(dot_theta1**2)*l_1*np.cos(theta1-theta2)))/(l_1*(2*m1+m2-m2*np.cos(2*theta1-2*theta2)))
     dotdot_theta2 = (2*np.sin(theta1-theta2)*((dot_theta1**2)*l_1*(m1+m2)+g*(m1+m2)*np.cos(theta1)+(dot_theta2**2)*l_2*m2*np.cos(theta1-theta2)))/(l_2*(2*m1+m2-m2*np.cos(2*theta1-2*theta2)))
-    return dot_theta1, dotdot_theta1-dot_theta1 , dot_theta2, dotdot_theta2-dot_theta2 #return derivative for all y 
+    return dot_theta1, dotdot_theta1-dot_theta1*dampening_l1 , dot_theta2, dotdot_theta2-dot_theta2*dampening_l2 #return derivative for all y 
 
 def coordinates(y,l_1,l_2):
     theta1,dot_theta1,theta2,dot_theta2 = y.T
