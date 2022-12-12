@@ -7,7 +7,7 @@ import numpy as np
 
 
 class pendulum():
-    def __init__(self,m1 = 1,m2 = 1,l_1 = 1,l_2 = 1,g = 9.81,time_steps = 1000,end_time = 100):
+    def __init__(self,m1 = 1,m2 = 1,l_1 = 1,l_2 = 1,g = 9.81,time_steps = 200,end_time = 10):
         self.m1 = m1
         self.m2 = m2
         self.l_1 = l_1
@@ -105,7 +105,7 @@ if __name__ == "__main__":
     """
     buffer_size= 500
     #pen = pendulum()
-    pen = dampend_pendulum(0.9,0.3)
+    pen = dampend_pendulum(0.3,0.3)
     y,_ = pen.sample(torch.tensor([2,0,3,0],dtype=torch.float))
 
     x1,y1,x2,y2,dot_x1,dot_y1,dot_x2,dot_y2,K,P,E = pen.info(y)

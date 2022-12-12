@@ -64,7 +64,7 @@ if __name__ == "__main__":
     end_time = 100
     buffer_size = 200
     #initial 
-    y0 = np.array([2,0,3,0]) #theta1,dot_theta1,theta2,dot_theta2
+    y0 = np.array([3,0,3,0]) #theta1,dot_theta1,theta2,dot_theta2
     t = np.linspace(0,end_time,time_steps)
 
     #calculate
@@ -99,4 +99,4 @@ if __name__ == "__main__":
         axis[1].plot(torch.arange(len(kenetic_energy_buffer)),kenetic_energy_buffer,color="r")
         axis[1].plot(torch.arange(len(potential_energy_buffer)),potential_energy_buffer,color="g")
         axis[1].plot(torch.arange(len(total_energy_buffer)),total_energy_buffer,color="b")
-        plt.pause(0.01)
+        plt.pause(0.01)    
